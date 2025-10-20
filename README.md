@@ -1,5 +1,4 @@
 # Ucad - Opettajan tuntiesimerkit
 
-main-haara init-versio.
+Ensimmäinen Ucad-esimerkkiprojekti, joka näyttää, miten luoda yksinkertainen HTTP-palvelin Node.js:llä ja käsitellä pyyntöjä.
 
-Perusrunko node.js-sovellukselle.
