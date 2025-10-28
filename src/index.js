@@ -1,4 +1,5 @@
 import express from 'express';
+import {mediaItems} from './media';
 const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
@@ -23,17 +24,26 @@ app.get('/', (req, res) => {
 // Serve static files ('public' folder -> http server root)
 app.use('/', express.static('public'));
 
+// Media endpoints
+
+// Get all media items
+app.get('/api/media', (req, res) => {
+  res.json(mediaItems);
+});
+
+// Users endpoints
+
 // Endpoints for /items API
 app.get('/api/items', (req, res) => {
   res.json(items);
 });
 app.get('/api/items/:id', (req, res) => {
   // TODO: choose correct item based on id property and send it
-  res.json({request_id: req.params.id})
+  res.json({request_id: req.params.id});
 });
 app.delete('/api/items/:id', (req, res) => {
   // TODO: delete correct item based on id property
-  res.json({deleteid_id: req.params.id})
+  res.json({deleteid_id: req.params.id});
 });
 app.post('/api/items', (req, res) => {
   // TODO: add new item to items[] (viime viikon harkka)
@@ -42,9 +52,10 @@ app.post('/api/items', (req, res) => {
 });
 app.put('/api/items/:id', (req, res) => {
   // TODO: modify correct item based on id property
-  res.json({modify_id: req.params.id})});
+  res.json({modify_id: req.params.id});
+});
 
-// Start the server  
+// Start the server
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
