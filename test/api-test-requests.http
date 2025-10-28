@@ -10,7 +10,7 @@ GET http://localhost:3000/
 GET http://localhost:3000/api/media
 
 ### GET media item by id
-GET http://localhost:3000/api/media/27
+GET http://localhost:3000/api/media/9590
 
 ### Add new media item
 POST http://localhost:3000/api/media
@@ -21,7 +21,7 @@ content-type: application/json
   "title": "New image",
   "description": "The description of the new image",
   "user_id": 305,
-  "media_type": "image/jpeg",
+  "media_type": "image/jpeg"
 }
 
 ### Update existing media item
@@ -34,7 +34,7 @@ content-type: application/json
 }
 
 ### Delete existing media item
-DELETE http://localhost:3000/api/media/27
+DELETE http://localhost:3000/api/media/9590
 
 ######################
 

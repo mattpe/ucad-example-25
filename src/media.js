@@ -52,4 +52,47 @@ const mediaItems = [
   },
 ];
 
-export {mediaItems};
+const getMediaByID = (req, res) => {
+  //console.log('req id', req.params.id);
+  const item = mediaItems.find(
+    (item) => item.media_id === parseInt(req.params.id),
+  );
+  //console.log('item found:', item);
+  if (item) {
+    res.json(item);
+  } else {
+    res.status(404).json({message: 'media not found'});
+  }
+};
+
+const getAllMedia = (req, res) => {
+  res.json(mediaItems);
+};
+
+const postNewMediaItem = (req, res) => {
+  const data = req.body;
+  //console.log('post data', data)
+  data.media_id = mediaItems[mediaItems.length - 1].media_id + 1;
+  mediaItems.push(data);
+  res.status(201).json({message: 'New item created', item: data});
+};
+
+/**
+ * Deletes media item from the mockdata based on value of id
+ * 
+ * @param {Object} req http request
+ * @param {Object} res http response
+ */
+const deleteMediaByID = (req, res) => {
+  const itemToBeDeletedIndex = mediaItems.findIndex(
+    (item) => item.media_id === parseInt(req.params.id),
+  );
+  if (itemToBeDeletedIndex != -1) {
+    mediaItems.splice(itemToBeDeletedIndex, 1);
+    res.status(200).json({message: 'item deleted'});
+  } else {
+    res.status(404).json({message: 'media item not found'});
+  }
+};
+
+export {getAllMedia, getMediaByID, postNewMediaItem, deleteMediaByID};

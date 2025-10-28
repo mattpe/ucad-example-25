@@ -1,5 +1,10 @@
 import express from 'express';
-import {mediaItems} from './media';
+import {
+  deleteMediaByID,
+  getAllMedia,
+  getMediaByID,
+  postNewMediaItem,
+} from './media.js';
 const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
@@ -12,6 +17,10 @@ const items = [
 // Config for Pug template engine
 app.set('views', './views');
 app.set('view engine', 'pug');
+
+// parse json from request bodies
+app.use(express.json());
+
 // Serve pug template (server root)
 app.get('/', (req, res) => {
   const content = {
@@ -27,11 +36,16 @@ app.use('/', express.static('public'));
 // Media endpoints
 
 // Get all media items
-app.get('/api/media', (req, res) => {
-  res.json(mediaItems);
-});
+app.get('/api/media', getAllMedia);
+// get media by id
+app.get('/api/media/:id', getMediaByID);
+// post new media item
+app.post('/api/media', postNewMediaItem);
+// delete media
+app.delete('/api/media/:id', deleteMediaByID);
 
 // Users endpoints
+// TODO: add all based on requirements!!
 
 // Endpoints for /items API
 app.get('/api/items', (req, res) => {
