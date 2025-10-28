@@ -1,5 +1,7 @@
 # UCAD example API test http request
 
+### Note: Install VSCode REST Client extension to use this file
+
 ### GET server root
 GET http://localhost:3000/
 
