@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
 });
 // Serve static files ('public' folder -> http server root)
 app.use('/', express.static('public'));
+app.use('/media', express.static('media'));
 
 // Media endpoints
 
