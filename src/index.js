@@ -5,12 +5,6 @@ const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
 
-const items = [
-  {id: 2, name: 'eka'},
-  {id: 11, name: 'toka juttu'},
-];
-
-
 // parse json from request bodies
 app.use(express.json());
 
