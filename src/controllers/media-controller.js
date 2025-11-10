@@ -14,9 +14,11 @@ const getMediaById = (req, res) => {
 };
 
 const postMedia = (req, res) => {
-  const {filename, title, description, user_id} = req.body;
-  if (filename && title && description && user_id) {
-    addMedia(req.body);
+  const {title, user_id} = req.body;
+  console.log('req file by multer', req.file);
+  const {filename} = req.file;
+  if (filename && title && user_id) {
+    addMedia({title, user_id, filename});
     res.status(201);
     res.json({message: 'New media item added.'})
   } else {

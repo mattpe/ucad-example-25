@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Serve static files ('public' folder -> http server root)
 app.use('/', express.static('public'));
-app.use('/media', express.static('media'));
+app.use('/uploads', express.static('uploads'));
 
 // Api endpoints
 app.use('/api/media', mediaRouter);
