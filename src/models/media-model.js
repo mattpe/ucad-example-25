@@ -1,29 +1,18 @@
-const mediaItems = [
-  {
-    media_id: 9592,
-    filename: 'f504.jpg',
-    filesize: 48975,
-    title: 'Desert',
-    description: '',
-    user_id: 3609,
-    media_type: 'image/jpeg',
-    created_at: '2023-10-12T06:59:05.000Z',
-  },
-  {
-    media_id: 9593,
-    filename: '60ac.jpg',
-    filesize: 23829,
-    title: 'Basement',
-    description: 'Light setup in basement',
-    user_id: 305,
-    media_type: 'image/jpeg',
-    created_at: '2023-10-12T06:56:41.000Z',
-  },
-];
+import promisePool from '../utils/database.js';
 
-const listAllMedia = () => {
-  return mediaItems;
+const listAllMedia = async () => {
+  try {
+    const [rows] = await promisePool.query('SELECT * FROM MediaItems');
+    console.log('rows', rows);
+    return rows;
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
 };
+
+
+// TODO: convert all endpoints to use database!!
 
 const findMediaById = (id) => {
   return mediaItems.find((item) => item.media_id == id);

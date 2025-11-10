@@ -1,9 +1,13 @@
 import express from 'express';
+// read .env file
+import 'dotenv/config';
 import mediaRouter from './routes/media-router.js';
 
 const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
+
+//console.log(process.env);
 
 // parse json from request bodies
 app.use(express.json());

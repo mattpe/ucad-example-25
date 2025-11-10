@@ -1,7 +1,7 @@
 import {addMedia, findMediaById, listAllMedia} from "../models/media-model.js";
 
-const getMedia = (req, res) => {
-  res.json(listAllMedia());
+const getMedia = async (req, res) => {
+  res.json(await listAllMedia());
 };
 
 const getMediaById = (req, res) => {
