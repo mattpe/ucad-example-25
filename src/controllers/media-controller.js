@@ -1,28 +1,32 @@
-import {addMedia, findMediaById, listAllMedia} from "../models/media-model.js";
+import {addMedia, findMediaById, listAllMedia} from '../models/media-model.js';
 
 const getMedia = async (req, res) => {
   res.json(await listAllMedia());
 };
 
-const getMediaById = (req, res) => {
-  const media = findMediaById(req.params.id);
+const getMediaById = async (req, res) => {
+  const media = await findMediaById(req.params.id);
   if (media) {
+    console.log(process.env.HOST);
+    media.filepath = process.env.UPLOADS_PATH + media.filename;
     res.json(media);
   } else {
     res.sendStatus(404);
   }
 };
 
-const postMedia = (req, res) => {
-  const {title, user_id} = req.body;
+const postMedia = async (req, res) => {
+  let {title, description, user_id} = req.body;
+  // replace description with empty string if undefined
+  description = description ? description : '';
   console.log('req file by multer', req.file);
-  const {filename} = req.file;
+  const {filename, size, mimetype} = req.file;
   if (filename && title && user_id) {
-    addMedia({title, user_id, filename});
+    const result =  await addMedia({user_id, filename, size, mimetype, title, description});
     res.status(201);
-    res.json({message: 'New media item added.'})
+    res.json({message: 'New media item added.', ...result});
   } else {
-    res.sendStatus(400);  
+    res.sendStatus(400);
   }
 };
 

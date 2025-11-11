@@ -9,7 +9,7 @@ import {
 
 // All media endpoints handled with express router
 const mediaRouter = express.Router();
-const upload = multer({dest: 'uploads/'});
+const upload = multer({dest: process.env.UPLOADS_PATH});
 
 
 mediaRouter

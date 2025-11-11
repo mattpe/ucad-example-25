@@ -14,14 +14,30 @@ const listAllMedia = async () => {
 
 // TODO: convert all endpoints to use database!!
 
-const findMediaById = (id) => {
-  return mediaItems.find((item) => item.media_id == id);
+const findMediaById = async (id) => {
+  try {
+    const [rows] = await promisePool.execute('SELECT * FROM mediaItems WHERE media_id = ?', [id]);
+    console.log('rows', rows);
+    return rows[0];
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
 };
 
-const addMedia = (media) => {
-  const {filename, title, description, user_id} = media;
-  const newId = mediaItems[0].media_id + 1;
-  mediaItems.unshift({media_id: newId, filename, title, description, user_id});
+const addMedia = async (media) => {
+  const {user_id, filename, size, mimetype, title, description} = media;
+  const sql = `INSERT INTO mediaItems (user_id, filename, filesize, media_type, title, description)
+               VALUES (?, ?, ?, ?, ?, ?)`;
+  const params = [user_id, filename, size, mimetype, title, description];
+  try {
+    const [result] = await promisePool.execute(sql, params);
+    //console.log('rows', rows);
+    return {media_id: result.insertId};
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
 };
 
 export {listAllMedia, findMediaById, addMedia};

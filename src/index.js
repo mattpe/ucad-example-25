@@ -3,9 +3,9 @@ import express from 'express';
 import 'dotenv/config';
 import mediaRouter from './routes/media-router.js';
 
-const hostname = '127.0.0.1';
+const hostname = process.env.HOSTNAME;
+const port = process.env.PORT;
 const app = express();
-const port = 3000;
 
 //console.log(process.env);
 

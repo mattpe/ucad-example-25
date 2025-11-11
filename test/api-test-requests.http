@@ -12,7 +12,7 @@ GET http://localhost:3000/
 GET http://localhost:3000/api/media
 
 ### GET media item by id
-GET http://localhost:3000/api/media/9593
+GET http://localhost:3000/api/media/6
 
 ### Add new media item
 POST http://localhost:3000/api/media
@@ -37,7 +37,7 @@ New cat image
 ------Boundary
 Content-Disposition: form-data; name="user_id"
 
-21
+2
 ------Boundary
 Content-Disposition: form-data; name="file"; filename="image.png"
 Content-Type: image/png
