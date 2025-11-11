@@ -7,8 +7,8 @@ const getMedia = async (req, res) => {
 const getMediaById = async (req, res) => {
   const media = await findMediaById(req.params.id);
   if (media) {
-    console.log(process.env.HOST);
-    media.filepath = process.env.UPLOADS_PATH + media.filename;
+    // add full filepath url to media object
+    media.filepath = `${req.protocol}://${req.headers.host}/${process.env.UPLOADS_PATH}/${media.filename}`;
     res.json(media);
   } else {
     res.sendStatus(404);
@@ -22,7 +22,14 @@ const postMedia = async (req, res) => {
   console.log('req file by multer', req.file);
   const {filename, size, mimetype} = req.file;
   if (filename && title && user_id) {
-    const result =  await addMedia({user_id, filename, size, mimetype, title, description});
+    const result = await addMedia({
+      user_id,
+      filename,
+      size,
+      mimetype,
+      title,
+      description,
+    });
     res.status(201);
     res.json({message: 'New media item added.', ...result});
   } else {
