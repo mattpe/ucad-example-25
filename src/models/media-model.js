@@ -16,7 +16,7 @@ const listAllMedia = async () => {
 
 const findMediaById = async (id) => {
   try {
-    const [rows] = await promisePool.execute('SELECT * FROM mediaItems WHERE media_id = ?', [id]);
+    const [rows] = await promisePool.execute('SELECT * FROM MediaItems WHERE media_id = ?', [id]);
     console.log('rows', rows);
     return rows[0];
   } catch (e) {
@@ -27,7 +27,7 @@ const findMediaById = async (id) => {
 
 const addMedia = async (media) => {
   const {user_id, filename, size, mimetype, title, description} = media;
-  const sql = `INSERT INTO mediaItems (user_id, filename, filesize, media_type, title, description)
+  const sql = `INSERT INTO MediaItems (user_id, filename, filesize, media_type, title, description)
                VALUES (?, ?, ?, ?, ?, ?)`;
   const params = [user_id, filename, size, mimetype, title, description];
   try {
