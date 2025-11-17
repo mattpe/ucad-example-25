@@ -1,4 +1,4 @@
-import {addMedia, findMediaById, listAllMedia} from '../models/media-model.js';
+import {addMedia, findMediaById, findMediaByUserId, listAllMedia} from '../models/media-model.js';
 
 const getMedia = async (req, res) => {
   res.json(await listAllMedia());
@@ -15,8 +15,21 @@ const getMediaById = async (req, res) => {
   }
 };
 
+/**
+ * Get media files for the logged in user based on token
+ * @param {*} req 
+ * @param {*} res 
+ */
+const getMediaByUser = async (req, res) => {
+  const media = await findMediaByUserId(req.user.user_id);
+  if (media) {
+    res.json(media);
+  } 
+};
+
 const postMedia = async (req, res) => {
-  let {title, description, user_id} = req.body;
+  let {title, description} = req.body;
+  const user_id = req.user.user_id;
   // replace description with empty string if undefined
   description = description ? description : '';
   console.log('req file by multer', req.file);
@@ -47,4 +60,4 @@ const deleteMedia = (req, res) => {
   res.sendStatus(200);
 };
 
-export {getMedia, getMediaById, postMedia, putMedia, deleteMedia};
+export {getMedia, getMediaById, getMediaByUser, postMedia, putMedia, deleteMedia};

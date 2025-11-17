@@ -1,5 +1,8 @@
 # UCAD example API test http request
 
+### Variables
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6Im1hdHRpIiwiZW1haWwiOiJtYXR0aUBleGFtcGxlLmNvbSIsInVzZXJfbGV2ZWxfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDI1LTExLTE3VDEyOjE1OjA3LjAwMFoiLCJpYXQiOjE3NjMzODQ0NjEsImV4cCI6MTc2MzQ3MDg2MX0.Vt3N-fryyzAvUo3cOlbXAWNvfoim9d6-GHQe767a03g
+
 ### Note: Install VSCode REST Client extension to use this file
 
 ### GET server root
@@ -13,6 +16,10 @@ GET http://localhost:3000/api/media
 
 ### GET media item by id
 GET http://localhost:3000/api/media/6
+
+### GET media items by user (logged in)
+GET http://localhost:3000/api/media/user
+Authorization: Bearer {{token}}
 
 ### Add new media item
 POST http://localhost:3000/api/media
@@ -28,16 +35,13 @@ content-type: application/json
 
 ### Add new media item including media file
 POST http://localhost:3000/api/media
+Authorization: Bearer {{token}}
 Content-Type: multipart/form-data; boundary=----Boundary
 
 ------Boundary
 Content-Disposition: form-data; name="title"
 
 New cat image
-------Boundary
-Content-Disposition: form-data; name="user_id"
-
-2
 ------Boundary
 Content-Disposition: form-data; name="file"; filename="image.png"
 Content-Type: image/png
@@ -55,7 +59,8 @@ content-type: application/json
 }
 
 ### Delete existing media item
-DELETE http://localhost:3000/api/media/9590
+DELETE http://localhost:3000/api/media/2
+Authorization: Bearer {{token}}
 
 ######################
 
@@ -85,6 +90,11 @@ content-type: application/json
   "username": "matti",
   "password": "salakala"
 }
+
+### Auth GET me
+GET http://localhost:3000/api/auth/me
+Authorization: Bearer {{token}}
+
 
 ### Update existing user
 PUT http://localhost:3000/api/users/27

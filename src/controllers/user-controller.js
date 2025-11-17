@@ -10,6 +10,8 @@ const postLogin = async (req, res) => {
   const user = await selectUserByUsername(req.body.username);
   const passwordMatch = user && user.password === req.body.password;
   if (passwordMatch) {
+    // DO NOT send password to client
+    delete user.password;
     const token = jwt.sign(user, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
@@ -31,4 +33,11 @@ const postUser = async (req, res) => {
   }
 };
 
-export {postLogin, postUser};
+ const getMe = async (req, res) => {
+   console.log('getMe', req.user);
+   if (req.user) {
+     res.json({message: 'token ok', user: req.user});
+   }
+ };
+
+export {postLogin, postUser, getMe};
