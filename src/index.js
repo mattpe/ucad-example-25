@@ -2,6 +2,8 @@ import express from 'express';
 // read .env file
 import 'dotenv/config';
 import mediaRouter from './routes/media-router.js';
+import userRouter from './routes/user-router.js';
+import authRouter from './routes/auth-router.js';
 
 const hostname = process.env.HOSTNAME;
 const port = process.env.PORT;
@@ -18,6 +20,8 @@ app.use('/uploads', express.static('uploads'));
 
 // Api endpoints
 app.use('/api/media', mediaRouter);
+app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
 
 // Users endpoints
 // TODO: add user router and use it
