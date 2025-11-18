@@ -1,10 +1,6 @@
-// user logic here
-// TODO: add all based on requirements!!
-
 import jwt from 'jsonwebtoken';
 import {addUser, selectUserByUsername} from '../models/user-model.js';
 import 'dotenv/config';
-import {validationResult} from 'express-validator';
 
 const postLogin = async (req, res) => {
   console.log('postLogin', req.body);
@@ -22,11 +18,7 @@ const postLogin = async (req, res) => {
   }
 };
 
-const postUser = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.array());
-  }
+const postUser = async (req, res, next) => {
   const newUser = req.body;
   // regular user level by default
   newUser.user_level_id = 1;
@@ -34,7 +26,9 @@ const postUser = async (req, res) => {
   if (result.user_id) {
     return res.json({message: 'User created.', user_id: result.user_id});
   } else {
-    return res.status(400).res.json({});
+    const error = new Error(result.error);
+    error.status = 400;
+    next(error);
   }
 };
 

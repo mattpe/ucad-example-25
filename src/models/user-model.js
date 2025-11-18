@@ -23,6 +23,8 @@ const addUser = async (user) => {
   } catch (e) {
     console.error('error', e.message);
     return {error: e.message};
+    // optionally
+    //throw new Error('user creation failed');
   }
 };
 

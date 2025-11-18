@@ -9,6 +9,7 @@ import {
 import {authenticateToken} from '../middlewares/authentication.js';
 import upload from '../middlewares/upload.js';
 import {body} from 'express-validator';
+import {validationErrors} from '../middlewares/error-handlers.js';
 
 // All media endpoints handled with express router
 const mediaRouter = express.Router();
@@ -23,6 +24,7 @@ mediaRouter
     upload.single('file'),
     body('title').isLength({min: 3, max: 100}),
     // TODO: add required validation rules
+    validationErrors,
     postMedia,
   );
 

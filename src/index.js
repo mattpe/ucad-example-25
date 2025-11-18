@@ -4,6 +4,7 @@ import 'dotenv/config';
 import mediaRouter from './routes/media-router.js';
 import userRouter from './routes/user-router.js';
 import authRouter from './routes/auth-router.js';
+import { errorHandler, notFoundHandler } from './middlewares/error-handlers.js';
 
 const hostname = process.env.HOSTNAME;
 const port = process.env.PORT;
@@ -23,8 +24,10 @@ app.use('/api/media', mediaRouter);
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 
-// Users endpoints
-// TODO: add user router and use it
+// not found route
+app.use(notFoundHandler);
+// generic error handler
+app.use(errorHandler);
 
 // Start the server
 app.listen(port, hostname, () => {

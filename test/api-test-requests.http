@@ -1,12 +1,12 @@
 # UCAD example API test http request
 
 ### Variables
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6Im1hdHRpIiwiZW1haWwiOiJtYXR0aUBleGFtcGxlLmNvbSIsInVzZXJfbGV2ZWxfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDI1LTExLTE3VDEyOjE1OjA3LjAwMFoiLCJpYXQiOjE3NjMzODQ0NjEsImV4cCI6MTc2MzQ3MDg2MX0.Vt3N-fryyzAvUo3cOlbXAWNvfoim9d6-GHQe767a03g
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJtYXR0aTMiLCJlbWFpbCI6Im1hdHRpM0BleGFtcGxlLmNvbSIsInVzZXJfbGV2ZWxfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDI1LTExLTE4VDExOjUxOjUxLjAwMFoiLCJpYXQiOjE3NjM0NzExNzEsImV4cCI6MTc2MzU1NzU3MX0.9sUgeWn4vMsbgTC5kDBx-rrh7xixqRWXii2W9HsIxqM
 
 ### Note: Install VSCode REST Client extension to use this file
 
 ### GET server root
-GET http://localhost:3000/
+GET http://localhost:3000
 
 
 ## /media resource
@@ -15,7 +15,7 @@ GET http://localhost:3000/
 GET http://localhost:3000/api/media
 
 ### GET media item by id
-GET http://localhost:3000/api/media/6
+GET http://localhost:3000/api/media/600
 
 ### GET media items by user (logged in)
 GET http://localhost:3000/api/media/user
@@ -87,8 +87,8 @@ POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
-  "username": "matti",
-  "password": "salakala"
+  "username": "matti3",
+  "password": "salakala3"
 }
 
 ### Auth GET me

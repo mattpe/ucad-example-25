@@ -1,4 +1,3 @@
-import { validationResult } from 'express-validator';
 import {
   addMedia,
   findMediaById,
@@ -10,14 +9,16 @@ const getMedia = async (req, res) => {
   res.json(await listAllMedia());
 };
 
-const getMediaById = async (req, res) => {
+const getMediaById = async (req, res, next) => {
   const media = await findMediaById(req.params.id);
   if (media) {
     // add full filepath url to media object
     media.filepath = `${req.protocol}://${req.headers.host}/${process.env.UPLOADS_PATH}/${media.filename}`;
     res.json(media);
   } else {
-    res.sendStatus(404);
+    const error = new Error('Media item not found');
+    error.status = 404;
+    next(error);
   }
 };
 
@@ -34,14 +35,6 @@ const getMediaByUser = async (req, res) => {
 };
 
 const postMedia = async (req, res) => {
-  // check if file is rejected by multer
-  if (!req.file) {
-    return res.status(400).json({error: 'Invalid or missing file'});
-  }
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.array());
-  }
   let {title, description} = req.body;
   const user_id = req.user.user_id;
   // replace description with empty string if undefined

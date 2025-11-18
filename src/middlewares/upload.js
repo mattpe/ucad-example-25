@@ -15,7 +15,9 @@ const upload = multer({
       cb(null, true);
     } else {
       // reject file
-      cb(null, false);
+      const error = new Error('Invalid or missing file');
+      error.status = 400;
+      cb(error, false);
     }
   },
 });
