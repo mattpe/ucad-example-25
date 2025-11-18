@@ -77,9 +77,9 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username": "matti",
-  "password": "salakala",
-  "email": "matti@example.com" 
+  "username": "matti3",
+  "password": "salakala3",
+  "email": "matti3@example.com" 
 }
 
 ### Login

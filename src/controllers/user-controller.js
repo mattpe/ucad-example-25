@@ -4,6 +4,7 @@
 import jwt from 'jsonwebtoken';
 import {addUser, selectUserByUsername} from '../models/user-model.js';
 import 'dotenv/config';
+import {validationResult} from 'express-validator';
 
 const postLogin = async (req, res) => {
   console.log('postLogin', req.body);
@@ -22,9 +23,13 @@ const postLogin = async (req, res) => {
 };
 
 const postUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json(errors.array());
+  }
   const newUser = req.body;
   // regular user level by default
-  newUser.user_level_id = 1; 
+  newUser.user_level_id = 1;
   const result = await addUser(newUser);
   if (result.user_id) {
     return res.json({message: 'User created.', user_id: result.user_id});
@@ -33,11 +38,11 @@ const postUser = async (req, res) => {
   }
 };
 
- const getMe = async (req, res) => {
-   console.log('getMe', req.user);
-   if (req.user) {
-     res.json({message: 'token ok', user: req.user});
-   }
- };
+const getMe = async (req, res) => {
+  console.log('getMe', req.user);
+  if (req.user) {
+    res.json({message: 'token ok', user: req.user});
+  }
+};
 
 export {postLogin, postUser, getMe};
