@@ -77,9 +77,9 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username": "matti3",
-  "password": "salakala3",
-  "email": "matti3@example.com" 
+  "username": "matti44",
+  "password": "salakala44",
+  "email": "matti44@example.com" 
 }
 
 ### Login
@@ -87,8 +87,8 @@ POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
-  "username": "matti3",
-  "password": "salakala3"
+  "username": "matti44",
+  "password": "salakala44"
 }
 
 ### Auth GET me
