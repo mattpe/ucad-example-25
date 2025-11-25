@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "apidoc": "apidoc -i src/ -o docs/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -20,6 +21,7 @@
     "prettier": "3.6.2"
   },
   "dependencies": {
+    "apidoc": "^1.2.0",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
